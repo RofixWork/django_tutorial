@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Student Info:</h2>
+<ul>
+    <li>Id: {{student.id}}</li>
+    <li>Name: {{student.first_name|capfirst}} {{student.last_name|capfirst}}</li>
+    <li>Date of Birth: {{student.date_of_birth|date}}</li>
+    <li>Age: {{student.age}} years</li>
+    <li>City: {{student.city|capfirst}}</li>
+    <li>Country: {{student.country|capfirst}}</li>
+</ul>
+<a href='{% url "students.index" %}' type="button" class="btn btn-primary">Back</a>
+{% endblock body %}

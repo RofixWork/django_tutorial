@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block body %}
+{% if teachers|length %}
+<div class='d-flex justify-content-between align-items-center'>
+    <h1>All Data</h1>
+    <a href={% url "teachers.create" %} class='btn btn-primary'>Add Item</a>
+</div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+                <tr>
+                    <th scope="row">{{teacher.id}}</th>
+                    <td>{{teacher.name}}</td>
+                    <td>{{teacher.email}}</td>
+                    <td>{{teacher.phone_number}}</td>
+                    <td>
+                        <a href={% url "teachers.update" id=teacher.id %} class="btn btn-primary btn-sm">UPDATE</a>
+                        <form action='{% url "teachers.delete" id=teacher.id %}' method='POST'>
+                            {% csrf_token %}
+                            <button class="btn btn-danger btn-sm">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <h2>List Empty</h2>
+    <a href={% url "teachers.create" %} class='btn btn-primary btn-md'>Add Item</a>
+{% endif %}
+{% endblock body %}

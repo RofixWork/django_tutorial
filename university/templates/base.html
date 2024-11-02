@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bootstrap.min.css" %}">
+</head>
+<body>
+    <header class='px-4 py-3 d-flex justify-content-between align-items-center'>
+        <h2>University</h2>
+        <nav class='d-flex gap-3 align-items-center'>
+            {% if user.is_authenticated %}
+                <a href="{% url "students.index" %}">Home</a>
+                <strong>{{user}}</strong>
+                <form action="{% url "logout" %}" method="post">
+                    {% csrf_token %}
+                    <button type='submit' class='btn btn-primary'>Logout</button>
+                </form>
+                {% else %}
+                <a href="{% url "register" %}">Regsiter</a>
+                <a href="{% url "login" %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <div class="container mt-3">
+        {% block body %}{% endblock body %}
+    </div>
+</body>
+</html>

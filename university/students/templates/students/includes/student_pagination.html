@@ -1,0 +1,11 @@
+<nav class='d-flex justify-content-center gap-4 align-items-center'>
+    {% if students.has_previous %}
+        <a href="?p={{students.previous_page_number}}&name={{name|default:''}}&order={{order}}">Previous</a>
+        <a href="?p={{students.previous_page_number}}&name={{name|default:''}}&order={{order}}">{{students.previous_page_number}}</a>
+    {% endif %}
+    <a class='btn btn-primary' href="?p={{students.number}}&name={{name|default:''}}&order={{order}}">{{students.number}}</a>
+    {% if students.has_next %}
+        <a href="?p={{students.next_page_number}}&name={{name|default:''}}&order={{order}}">{{students.next_page_number}}</a>
+        <a href="?p={{students.next_page_number}}&name={{name|default:''}}&order={{order}}">Next</a>
+    {% endif %}
+</nav>

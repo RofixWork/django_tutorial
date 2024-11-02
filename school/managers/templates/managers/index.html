@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block body %}
+<div class='d-flex align-items-center justify-content-between'>
+    <h1>Managers</h1>
+    <a href={% url "managers.create" %} class='btn btn-primary'>Add</a>
+</div>
+<div class="mt-3">
+    <h2 class="mb-3">{{managers_count|default:"0"}} Mangers</h2>
+    <form action={% url "managers.index" %} method='GET'>
+        <input name='title' class="form-control" placeholder='Search' type='search' value={{title|default:''}}>
+    </form>
+    {% if managers|length %}
+        <hr>
+        <table class="mt-2 table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Department</th>
+                <th scope="col">Salary</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for manager in managers %}
+                    <tr>
+                        <th scope="row">{{manager.id}}</th>
+                        <td>{{manager.name|title}}</td>
+                        <td>{{manager.department|title}}</td>
+                        <td>${{manager.salary}}</td>
+                        <td>
+                            <div class='d-flex align-items-center gap-2'>
+                                <a class='btn btn-primary btn-sm' href={% url "managers.show" id=manager.id %}>SHOW</a>
+                                <a class='btn btn-secondary btn-sm' href={% url "managers.update" id=manager.id %}>UPDATE</a>
+                                <form action="{% url "managers.delete" id=manager.id %}" method='POST'>
+                                    {% csrf_token %}
+                                    <button type='submit' class='btn btn-danger btn-sm' href={% url "managers.update" id=manager.id %}>DELETE</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No Managers...</h2>
+    {% endif %}
+    {% comment %} pagination {% endcomment %}
+    <div class="d-flex gap-3 align-items-center justify-content-center mt-4">
+        {% if managers.has_previous %}
+            <a href="?p={{managers.previous_page_number}}">Previous</a>
+            <a href="?p={{managers.previous_page_number}}">{{managers.previous_page_number}}</a>
+        {% endif %}
+        <a class='text-white bg-black px-3 py-2 text-decoration-none' href="?p={{managers.number}}">{{managers.number}}</a>
+        {% if managers.has_next %}
+            <a href="?p={{managers.next_page_number}}">{{managers.next_page_number}}</a>
+            <a href="?p={{managers.next_page_number}}">Next</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

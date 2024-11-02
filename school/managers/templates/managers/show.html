@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block body %}
+<div class='d-flex align-items-center justify-content-between'>
+    <h1>Manager Id: {{manager.id}}</h1>
+    <a href={% url "managers.index" %} class='btn btn-primary'>Back</a>
+</div>
+<hr>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Hire Date</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Department</th>
+        <th scope="col">Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th >{{manager.name|title}}</th>
+        <td>{{manager.hire_date|date}}</td>
+        <td>{{manager.phone_number}}</td>
+        <td>{{manager.department|title}}</td>
+        <td>{{manager.salary}}</td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock body %}

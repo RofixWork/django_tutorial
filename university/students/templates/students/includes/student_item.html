@@ -1,0 +1,17 @@
+<tr>
+    <th scope="row">{{student.id}}</th>
+    <td>{{student.first_name | capfirst}} {{student.last_name | capfirst}}</td>
+    <td>{{student.city|title}}</td>
+    <td>{{student.age}}</td>
+    <td>{{student.country|capfirst}}</td>
+    <td>
+        <div class='d-flex align-items-center gap-2'>
+            <a class='btn btn-primary btn-sm' href={% url "students.show" id=student.id %}>SHOW</a>
+            <a class='btn btn-secondary btn-sm' href={% url "students.update" id=student.id %}>UPDATE</a>
+            <form action="{% url "students.delete" id=student.id %}" method='POST'>
+                {% csrf_token %}
+                <button type='submit' class='btn btn-danger btn-sm'>DELETE</button>
+            </form>
+        </div>
+    </td>
+</tr>

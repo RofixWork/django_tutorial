@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+<h2>Posts</h2>
+{% for post in posts %}
+<a href="{% url "posts.show" id=post.id %}"><h2>{{post.id}} - {{post.title}}</h2></a>
+<hr>
+{% empty %}
+<h3>Not Exist any Posts...</h3>
+{% endfor %}
+{% endblock body %}

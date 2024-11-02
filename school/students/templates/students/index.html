@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <h1>Count: {{ count }} Students</h1>
+    <hr>
+    {% for student in students %}
+        <a href={% url "students.show" student_id=student.id %}>
+            <h1>{{ student.id }} - {{ student.name | title}}</h1>
+        </a>
+        <h2>Age: {{ student.age }} years</h2>
+        <h3>Students Class: {{ student.student_class }}</h3>
+        <hr>
+    {% empty %}
+        <h3>Not found any Students</h3>
+    {% endfor %}
+{% endblock body %}

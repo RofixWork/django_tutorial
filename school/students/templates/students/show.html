@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ student.id }} - {{ student.name  | title}}</h1>
+<h2>Age: {{ student.age }} years</h2>
+<h3>Students Class: {{ student.student_class}}</h3>
+<a href={% url "students.index" %}>Back to Home</a>
+<hr>
+{% endblock body %}

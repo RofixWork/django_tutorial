@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<h3>Info</h3>
+<hr>
+{% for user in userdatas %}
+    <div class="mb-3">
+        <h2>Username: {{user.username}}</h2>
+        <img src="{{user.file.url}}" width='400' height='400' alt="">
+        <hr>
+    </div>
+{% endfor %}
+{% endblock body %}
